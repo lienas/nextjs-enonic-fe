@@ -66,10 +66,10 @@ Moving over to the Next app, we must register the new component that support act
 
 . **Add the part implementation to the Next app**
 +
-.src/components/parts/ChildList.tsx
+.src/components/parts/ChildList-b.tsx
 [source,JavaScript]
 ----
-include::{sourcedir}/components/parts/ChildList.tsx[]
+include::{sourcedir}/components/parts/ChildList-b.tsx[]
 ----
 +
 . Then, **register the components** in _mappings.ts:
@@ -95,7 +95,7 @@ As you may have noticed this component has a query, a view and a processor. Proc
 The Enonic adapter will execute the query, pass the result via the processor, then to the view which finally renders the part.
 +
 image:child-list-rendered.png[title="Part rendered with list of persons as seen from Content Studio",width=1440px]
-+ 
++
 Try customizing the part configuration and see what happens.
 
 == Optional Task: The heading part
@@ -154,4 +154,4 @@ ComponentRegistry.addPart(`${APP_NAME}:heading`, {
 +
 You should now have two configurable parts to play with.
 
-In the next chapter we will make page composition even more interesting, with the introduction of <<layouts#, layouts>>. 
+In the next chapter we will make page composition even more interesting, with the introduction of <<layouts#, layouts>>.

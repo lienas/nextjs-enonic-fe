@@ -1,6 +1,7 @@
 import React from "react"
-import Link from "next/link";
+import NextLink from "next/link";
 import {getUrl} from "../../_enonicAdapter/utils";
+import {Heading} from "@chakra-ui/react";
 
 export interface HeaderProps {
     title: string;
@@ -26,8 +27,8 @@ const Header = ({title, logoUrl}: HeaderProps) => {
             }}
         >
             {title && (
-                <h1 style={{margin: 0}}>
-                    <Link
+                <Heading color={"orange"}>
+                    <NextLink
                         href={getUrl('')}>
                         <a style={{
                             color: `white`,
@@ -36,8 +37,8 @@ const Header = ({title, logoUrl}: HeaderProps) => {
                         >
                             {title}
                         </a>
-                    </Link>
-                </h1>
+                    </NextLink>
+                </Heading>
             )}
             {logoUrl && (
                 <img src={logoUrl}

@@ -20,7 +20,7 @@ const PropsView = (props: any) => {
 
 export default PropsView;
 
-const DataDump = ({label, data}: Props) => (
+export const DataDump = ({label, data}: Props) => (
     (data && (
             <>
                 {label && (

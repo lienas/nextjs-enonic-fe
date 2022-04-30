@@ -1,9 +1,10 @@
 import type {AppProps} from 'next/app'
-import '../styles/globals.css'
 import React from 'react';
 import {getUrl, RENDER_MODE, XP_REQUEST_TYPE} from "../_enonicAdapter/utils";
 import Header from "../components/views/Header";
 import Footer from "../components/views/Footer";
+import {ChakraProvider} from "@chakra-ui/react";
+import {Container} from "@chakra-ui/layout";
 
 /**
  * Wraps all rendered components
@@ -25,19 +26,15 @@ function MyApp({Component, pageProps}: AppProps) {
     }
     /*return <Component {...pageProps} />;*/
     return (
-        <>
+        <ChakraProvider>
             <Header
                 title="🔥 Next.XP"
                 logoUrl={getUrl('images/xp-shield.svg')}/>
-            <main style={{
-                margin: `0 auto`,
-                maxWidth: 960,
-                padding: `0 1rem`,
-            }}>
+            <Container maxW={"container.lg"}>
                 <Component {...pageProps} />
-            </main>
+            </Container>
             <Footer/>
-        </>
+        </ChakraProvider>
     );
 
 }
