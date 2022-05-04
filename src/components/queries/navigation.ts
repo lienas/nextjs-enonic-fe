@@ -5,6 +5,7 @@ query($path:ID!){
       id
       title
       path
+      url
       isActive      
     }   
   }

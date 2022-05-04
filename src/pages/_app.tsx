@@ -7,6 +7,7 @@ import {ChakraProvider} from "@chakra-ui/react";
 import {Container} from "@chakra-ui/layout";
 import PropsView from "../components/views/Props";
 import '../styles/globals.css';
+import MainNavigation from "../components/ui/MainNavigation";
 
 /**
  * Wraps all rendered components
@@ -26,6 +27,8 @@ function MyApp({Component, pageProps}: AppProps) {
             return null;
         }
     }
+    const common = pageProps.common;
+    console.log("Common Props %s", common);
     /*return <Component {...pageProps} />;*/
     return (
         <ChakraProvider>
@@ -33,6 +36,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 title="🔥 Next.XP"
                 logoUrl={getUrl('images/xp-shield.svg')}/>
             <Container maxW={"container.lg"}>
+                <MainNavigation {...common}/>
                 <Component {...pageProps} />
                 <PropsView {...pageProps}/>
             </Container>
