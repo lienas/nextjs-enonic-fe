@@ -36,7 +36,7 @@ const ChildList = (props: PartProps) => {
             maxWidth: 960,
             padding: `0 1.0875rem`,
         }}>
-            <Heading as={"h2"}>{totalCount} News</Heading>
+            <Heading as={"h1"} color={"limegreen"}>{totalCount} Element</Heading>
             {
                 childs &&
                 <UnorderedList>{

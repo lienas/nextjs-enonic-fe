@@ -52,6 +52,11 @@ export class RichTextProcessor {
                 link.setAttribute('href', this.urlFunction(this.stripApiUrl(href)));
             }
         })
+        //todo: refactor to generic function
+        const headers1 = root.querySelectorAll('h1');
+        headers1.forEach(header => {
+            header.setAttribute('class','chakra-heading css-h1');
+        })
     }
 
     public static setUrlFunction(func: (url: string) => string): void {

@@ -10,8 +10,10 @@ body {
   box-sizing: border-box;
 }
 
-h1 {
-  font-size: 2em;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
+.css-h1 {
+  font-family: var(--chakra-fonts-heading);
+  font-weight: var(--chakra-fontWeights-bold);
+  font-size: var(--chakra-fontSizes-3xl);
+  color: limegreen;
+  line-height: 1.33;
 }
