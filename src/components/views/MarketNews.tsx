@@ -1,32 +1,23 @@
 import {FetchContentResult} from "../../_enonicAdapter/guillotine/fetchContent";
-import {getUrl} from "../../_enonicAdapter/utils";
-import {
-    Box,
-    Button,
-    Flex,
-    Grid,
-    GridItem,
-    Heading,
-    HStack,
-    IconButton,
-    Image,
-    Link,
-    Text,
-    VStack
-} from "@chakra-ui/react";
+import {getUrl, RENDER_MODE} from "../../_enonicAdapter/utils";
+import {Box, Flex, Heading, Image, Link} from "@chakra-ui/react";
 import {ExternalLinkIcon} from "@chakra-ui/icons";
 import PropsView from "./Props";
 import NextLink from "next/link";
 import {Container} from "@chakra-ui/layout";
+import {RichTextProcessor} from "../../_enonicAdapter/RichTextProcessor";
+import React from "react";
 
 const MarketNews = (props: FetchContentResult) => {
-    console.log("props.data for marketnews %s", props.data);
+    //console.log("props.data for marketnews %s", props.data);
     const {displayName, data, parent} = props.data?.get as any;
-    console.log("data for marketnews %s", data);
+    //console.log("data for marketnews %s", data);
     const {content, pubDate, imageAttachment, image, link} = data;
 
     const {_path} = parent;
     const parentUrl = getUrl(_path);
+    const renderMode = props.meta?.renderMode ? props.meta?.renderMode : RENDER_MODE.NEXT;
+
     return (
         <Container maxW={"container.lg"} my={5}>
             <Box>{pubDate}</Box>
@@ -37,7 +28,7 @@ const MarketNews = (props: FetchContentResult) => {
                     <Image src={imageAttachment.imageUrl} alt={image} title={displayName}/>
                 </Box>
                 <Box>
-                    <Box dangerouslySetInnerHTML={{__html: content}}/>
+                    <section dangerouslySetInnerHTML={{__html: RichTextProcessor.process(content, renderMode)}}/>
                     <Box mt={5}>
                         <Link href={link} isExternal mt={5} verticalAlign={"middle"}>
                             vollständigen Artikel lesen <ExternalLinkIcon/>

@@ -8,7 +8,17 @@ query ($path: ID!) {
       ... on com_enonic_app_nextjsdemo_MarketNews {
         data {
           title
-          content
+           content(processHtml:{type:absolute}) {
+            processedHtml
+            links {
+              ref
+              media {
+                content {
+                  _id
+                }
+              }
+            }
+          }
           description
           pubDate
           source

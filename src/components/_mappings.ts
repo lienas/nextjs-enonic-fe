@@ -14,10 +14,11 @@ import getMarketNews from "./queries/getMarketNews";
 import Banner from "./parts/Banner";
 import {getBannerUrl} from "./queries/banner";
 import Container from "./layouts/Container";
+import {mainNavigationQuery} from "./queries/navigation";
 
 
 // You can set common query for all views here
-ComponentRegistry.setCommonQuery([commonQuery, commonVariables]);
+ComponentRegistry.setCommonQuery([mainNavigationQuery, commonVariables]);
 //ComponentRegistry.setCommonQuery(mainNavigationQuery);
 
 // Content type mappings

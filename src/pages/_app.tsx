@@ -5,6 +5,7 @@ import Header from "../components/views/Header";
 import Footer from "../components/views/Footer";
 import {ChakraProvider} from "@chakra-ui/react";
 import {Container} from "@chakra-ui/layout";
+import PropsView from "../components/views/Props";
 
 /**
  * Wraps all rendered components
@@ -32,6 +33,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 logoUrl={getUrl('images/xp-shield.svg')}/>
             <Container maxW={"container.lg"}>
                 <Component {...pageProps} />
+                <PropsView {...pageProps}/>
             </Container>
             <Footer/>
         </ChakraProvider>

@@ -1,6 +1,7 @@
 import React from "react"
 import { PageProps } from "../../_enonicAdapter/views/BasePage";
 import RegionsView from '../../_enonicAdapter/views/Region';
+import PropsView from "../views/Props";
 
 const MainPage = (props: PageProps) => {
     const page = props.page;
@@ -15,6 +16,7 @@ const MainPage = (props: PageProps) => {
     return (
         <>
             <RegionsView {...props} name="main"/>
+            <PropsView {...props}/>
         </>
     );
 };

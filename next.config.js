@@ -2,7 +2,7 @@
 const cspHeaders = [
     {
         key: 'Content-Security-Policy',
-        value: `script-src 'self' 'unsafe-eval' 'unsafe-inline';`
+        value: `script-src 'self' 'unsafe-eval' 'unsafe-inline';`,
     }
 ]
 
@@ -14,7 +14,8 @@ module.exports = {
             {
                 // Apply these headers to all routes in your application.
                 source: '/:path*',
-                headers: cspHeaders,
+                headers: cspHeaders
+
             },
         ]
     },
