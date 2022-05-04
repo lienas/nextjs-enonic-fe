@@ -53,10 +53,17 @@ export class RichTextProcessor {
             }
         })
         //todo: refactor to generic function
-        const headers1 = root.querySelectorAll('h1');
-        headers1.forEach(header => {
-            header.setAttribute('class','chakra-heading css-h1');
-        })
+        this.parseTags(root, "h1", "chakra-heading css-h1");
+        this.parseTags(root, "h2", "chakra-heading css-h2");
+        this.parseTags(root, "h3", "chakra-heading css-h3");
+        this.parseTags(root, "a", "chakra-link css-a");
+    }
+
+    private static parseTags(root: HTMLElement, tag: string, classes: string) {
+        const elements = root.querySelectorAll(tag);
+        elements.forEach(elem => {
+            elem.setAttribute('class', classes);
+        });
     }
 
     public static setUrlFunction(func: (url: string) => string): void {

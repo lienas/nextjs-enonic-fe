@@ -1,19 +1,72 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .css-h1 {
-  font-family: var(--chakra-fonts-heading);
-  font-weight: var(--chakra-fontWeights-bold);
-  font-size: var(--chakra-fontSizes-3xl);
-  color: limegreen;
-  line-height: 1.33;
+    font-family: var(--chakra-fonts-heading);
+    font-weight: var(--chakra-fontWeights-bold);
+    font-size: var(--chakra-fontSizes-3xl);
+    color: limegreen;
+    line-height: 1.33;
+}
+
+@media screen and (min-width: 48em) {
+    .css-h1 {
+        font-size: var(--chakra-fontSizes-5xl);
+        line-height: 1.2;
+    }
+}
+
+
+.css-h2 {
+    font-family: var(--chakra-fonts-heading);
+    font-weight: var(--chakra-fontWeights-bold);
+    font-size: var(--chakra-fontSizes-2xl);
+    line-height: 1.33;
+}
+
+@media screen and (min-width: 48em) {
+    .css-h2 {
+        font-size: var(--chakra-fontSizes-4xl);
+        line-height: 1.2;
+    }
+}
+
+.css-h3 {
+    font-family: var(--chakra-fonts-heading);
+    font-weight: var(--chakra-fontWeights-bold);
+    font-size: var(--chakra-fontSizes-3xl);
+    line-height: 1.33;
+}
+
+@media screen and (min-width: 48em) {
+    .css-h3 {
+        font-size: var(--chakra-fontSizes-4xl);
+        line-height: 1.2;
+    }
+}
+
+
+.css-a {
+    transition-property: var(--chakra-transition-property-common);
+    transition-duration: var(--chakra-transition-duration-fast);
+    transition-timing-function: var(--chakra-transition-easing-ease-out);
+    cursor: pointer;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    color: orange;
+}
+
+.css-a:hover {
+    text-decoration: underline;
 }
