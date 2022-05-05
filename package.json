@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/pro-theme": "^0.0.47",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -19,7 +20,8 @@
     "next": "^12.1.5",
     "node-html-parser": "^5.3.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "@types/next": "^9.0.0",
