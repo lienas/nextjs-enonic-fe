@@ -1,5 +1,7 @@
 import Document, {DocumentContext, Head, Html, Main, NextScript} from 'next/document'
 import {PORTAL_COMPONENT_ATTRIBUTE} from '../_enonicAdapter/utils';
+import { ColorModeScript } from '@chakra-ui/react';
+import {theme} from "../styles/theme";
 
 class MyDocument
     extends Document {
@@ -18,6 +20,7 @@ class MyDocument
             <Html>
                 <Head/>
                 <body {...bodyAttrs}>
+                <ColorModeScript initialColorMode={theme.config.initialColorMode} />
                 <Main/>
                 <NextScript/>
                 </body>

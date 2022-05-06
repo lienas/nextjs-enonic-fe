@@ -15,6 +15,8 @@ import {Container} from "@chakra-ui/layout";
 import {Logo2} from "../ui/Logo2";
 import {getUrl} from "../../_enonicAdapter/utils";
 import NextLink from "next/link";
+import {Logo} from "../ui/Logo";
+import {DarkModeToggler} from "../ui/DarkModeToggler";
 
 
 export interface HeaderProps extends PageProps {
@@ -31,14 +33,15 @@ const Header = (props: HeaderProps) => {
             <Box as="nav" bg="bg-surface" boxShadow={useColorModeValue('sm', 'sm-dark')}>
                 <Container py={{base: '4', lg: '5'}} maxW={"container.lg"} >
                     <HStack spacing="10" justify="space-between">
-                        <Logo2/>
+                        <Logo2 color={"brand.100"}/>
                         {isDesktop ? (
                             <Flex justify="space-between" flex="1">
                                 <ButtonGroup variant="link" spacing="8">
                                     {props.common.getMenuItems.map((item: any) => (
                                         <NextLink key={item} href={getUrl(item.path)} passHref>
                                             <Button as={"a"}
-                                                    color={item.isActive ? "brand.100" : "default"}
+                                                    //color={item.isActive ? "brand.100" : undefined}
+                                                    variant={"link"}
                                                     size={"md"}
                                                     p={1}>
                                                 {item.title}
@@ -49,6 +52,7 @@ const Header = (props: HeaderProps) => {
                                 <HStack spacing="3">
                                     <Button variant="ghost">Sign in</Button>
                                     <Button variant="primary">Sign up</Button>
+                                    <DarkModeToggler/>
                                 </HStack>
                             </Flex>
                         ) : (

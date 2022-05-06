@@ -70,3 +70,12 @@ body {
 .css-a:hover {
     text-decoration: underline;
 }
+/* Styles for Logo */
+/*.cls-2 {*/
+/*    fill: var(--chakra-colors-gray-500);*/
+/*}*/
+
+/*.cls-2:hover {*/
+/*    fill: orange;*/
+/*    cursor: pointer;*/
+/*}*/

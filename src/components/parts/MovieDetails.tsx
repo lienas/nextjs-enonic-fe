@@ -1,6 +1,8 @@
 import React from "react"
 import {APP_NAME_UNDERSCORED, getUrl} from '../../_enonicAdapter/utils'
 import {PartProps} from '../../_enonicAdapter/views/BasePart';
+import NextLink from 'next/link';
+import {Link} from "@chakra-ui/react";
 
 
 export const getMovie = `
@@ -64,7 +66,9 @@ const MovieView = (props: PartProps) => {
                 {data?.cast && <Cast cast={data.cast}/>}
             </div>
             <p>
-              <a href={getUrl(parent._path)}>Back to Movies</a>
+                <NextLink href={getUrl(parent._path)} passHref>
+                    <Link>Back to Movies</Link>
+                </NextLink>
             </p>
         </>
     );
@@ -151,9 +155,11 @@ const CastMember = (props: CastMemberProps) => {
             }
             <div>
                 <p>{character}</p>
-                <p><a href={getUrl(_path)}>
-                    {displayName}
-                </a></p>
+                <p>
+                    <NextLink href={getUrl(_path)} passHref>
+                        <Link>{displayName}</Link>
+                    </NextLink>
+                </p>
             </div>
         </li>
     );

@@ -3,10 +3,11 @@ import React from 'react';
 import {getUrl, RENDER_MODE, XP_REQUEST_TYPE} from "../_enonicAdapter/utils";
 import Header from "../components/views/Header";
 import Footer from "../components/views/Footer";
-import {ChakraProvider, extendTheme} from "@chakra-ui/react";
+import {ChakraProvider, extendTheme, type ThemeConfig} from "@chakra-ui/react";
 import {Container} from "@chakra-ui/layout";
 import PropsView from "../components/views/Props";
 import '../styles/globals.css';
+import {theme} from "../styles/theme";
 
 /**
  * Wraps all rendered components
@@ -15,15 +16,6 @@ import '../styles/globals.css';
  */
 function MyApp({Component, pageProps}: AppProps) {
 
-    const theme = extendTheme({
-        colors: {
-            brand: {
-                100: "#c9d200",
-                // ...
-                900: "#1a202c",
-            },
-        },
-    })
 
     // Component rendering - for component updates in Content Studio without reloading page
     if (pageProps.meta) {
