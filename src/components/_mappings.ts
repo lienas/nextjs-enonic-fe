@@ -16,7 +16,7 @@ import {getBannerUrl} from "./queries/banner";
 import Container from "./layouts/Container";
 import {mainNavigationQuery} from "./queries/navigation";
 import getMarketNewsByPath from "./queries/getMarketNewsByPath";
-import MarketNewsArchive, {getMarketNewsArchive} from "./parts/MarketNewsArchive";
+import MarketNewsArchive, {getMarketNewsArchive, newsArchiveProcessor} from "./parts/MarketNewsArchive";
 
 
 // You can set common query for all views here
@@ -57,7 +57,8 @@ ComponentRegistry.addPart(`${APP_NAME}:child-list`, {
 
 ComponentRegistry.addPart(`${APP_NAME}:market-news-archive`, {
     query: getMarketNewsArchive,
-    view: MarketNewsArchive
+    view: MarketNewsArchive,
+    processor: newsArchiveProcessor
 })
 
 
