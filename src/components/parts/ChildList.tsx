@@ -2,10 +2,10 @@ import React, {useEffect, useState} from "react"
 import {PartProps} from '../../_enonicAdapter/views/BasePart';
 import {Context} from '../../pages/[[...contentPath]]';
 import {VariablesGetterResult} from '../../_enonicAdapter/ComponentRegistry';
-import {CONTENT_API_URL, getUrl} from '../../_enonicAdapter/utils'
+import {getUrl} from '../../_enonicAdapter/utils'
 import PropsView from "../views/Props";
 import NextLink from "next/link";
-import {Button, Heading, Link, ListItem, UnorderedList} from "@chakra-ui/react";
+import {Heading, Link, ListItem, UnorderedList} from "@chakra-ui/react";
 import Pager from "../ui/Pager";
 
 const ChildList = (props: PartProps) => {

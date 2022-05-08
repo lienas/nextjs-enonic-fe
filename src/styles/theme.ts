@@ -21,9 +21,9 @@ export const theme = extendTheme({
                 //color: "brand.100"
             },
             variants: {
-                link:({colorMode}) => {
+                link:(props: { colorMode: string; }) => {
                     return ({
-                        color:  colorMode === 'dark' ? "white" : "gray.900",
+                        color:  props.colorMode === 'dark' ? "white" : "gray.900",
                         _hover: {
                             color: "brand.100"
                         },

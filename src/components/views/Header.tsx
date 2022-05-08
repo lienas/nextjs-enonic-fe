@@ -37,10 +37,10 @@ const Header = (props: HeaderProps) => {
                         {isDesktop ? (
                             <Flex justify="space-between" flex="1">
                                 <ButtonGroup variant="link" spacing="8">
-                                    {props.common.getMenuItems.map((item: any) => (
-                                        <NextLink key={item} href={getUrl(item.path)} passHref>
+                                    {props.common.getMenuItems.map((item: any, key: number) => (
+                                        <NextLink key={key} href={getUrl(item.path)} passHref>
                                             <Button as={"a"}
-                                                    //color={item.isActive ? "brand.100" : undefined}
+                                                    color={item.isActive ? "brand.100" : undefined}
                                                     variant={"link"}
                                                     size={"md"}
                                                     p={1}>

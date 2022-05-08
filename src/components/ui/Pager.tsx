@@ -25,50 +25,50 @@ const Pager = (props: PagerProps) => {
     }
 
     console.log("Pager:: PagerProps = %s ", props);
-    if (total <= pageSize ){
+    if (total <= pageSize + 1) {
         return null;
     }
 
-        return (
-            <HStack my={2}>
-                <NextLink href={prevUrl} passHref>
-                    <IconButton
-                        as={"a"}
-                        variant="outline"
-                        disabled={!hasPrev}
-                        size={"xs"}
-                        aria-label={"previous"}>
-                        <ArrowBackIcon/>
-                    </IconButton>
-                </NextLink>
-                {
-                    links.map((link, index) => {
-                        const activePage = index + 1 == pageIndex;
-                        return (
-                            <NextLink key={index} href={link} passHref>
-                                <Button as={"a"}
-                                        variant={activePage ? "solid" : "outline"}
-                                        colorScheme={activePage ? "orange" : "gray"}
-                                        disabled={activePage}
-                                        size={"xs"}>
-                                    {index + 1}
-                                </Button>
-                            </NextLink>
-                        )
-                    })
-                }
-                <NextLink href={nextUrl} passHref>
-                    <IconButton
-                        as={"a"}
-                        variant="outline"
-                        disabled={!hasNext}
-                        size={"xs"}
-                        aria-label={"next"}>
-                        <ArrowForwardIcon/>
-                    </IconButton>
-                </NextLink>
-            </HStack>
-        );
+    return (
+        <HStack my={2}>
+            <NextLink href={prevUrl} passHref>
+                <IconButton
+                    as={"a"}
+                    variant="outline"
+                    disabled={!hasPrev}
+                    size={"xs"}
+                    aria-label={"previous"}>
+                    <ArrowBackIcon/>
+                </IconButton>
+            </NextLink>
+            {
+                links.map((link, index) => {
+                    const activePage = index + 1 == pageIndex;
+                    return (
+                        <NextLink key={index} href={link} passHref>
+                            <Button as={"a"}
+                                    variant={activePage ? "solid" : "outline"}
+                                    colorScheme={activePage ? "orange" : "gray"}
+                                    disabled={activePage}
+                                    size={"xs"}>
+                                {index + 1}
+                            </Button>
+                        </NextLink>
+                    )
+                })
+            }
+            <NextLink href={nextUrl} passHref>
+                <IconButton
+                    as={"a"}
+                    variant="outline"
+                    disabled={!hasNext}
+                    size={"xs"}
+                    aria-label={"next"}>
+                    <ArrowForwardIcon/>
+                </IconButton>
+            </NextLink>
+        </HStack>
+    );
 };
 
 export default Pager;

@@ -5,7 +5,7 @@ import PropsView from './views/Props';
 import getPerson from "./queries/getPerson";
 import Person from "./views/Person";
 import MainPage from "./pages/Main";
-import ChildList, {childListProcessor, getChildList} from "./parts/ChildList-a";
+import ChildList, {childListProcessor, getChildList} from "./parts/ChildList";
 import Heading from "./parts/Heading";
 import TwoColumnLayout from "./layouts/TwoColumnLayout";
 import MovieDetails, {getMovie} from "./parts/MovieDetails";
@@ -15,6 +15,8 @@ import Banner from "./parts/Banner";
 import {getBannerUrl} from "./queries/banner";
 import Container from "./layouts/Container";
 import {mainNavigationQuery} from "./queries/navigation";
+import getMarketNewsByPath from "./queries/getMarketNewsByPath";
+import MarketNewsArchive, {getMarketNewsArchive} from "./parts/MarketNewsArchive";
 
 
 // You can set common query for all views here
@@ -52,6 +54,13 @@ ComponentRegistry.addPart(`${APP_NAME}:child-list`, {
     processor: childListProcessor,
     view: ChildList
 });
+
+ComponentRegistry.addPart(`${APP_NAME}:market-news-archive`, {
+    query: getMarketNewsArchive,
+    view: MarketNewsArchive
+})
+
+
 
 ComponentRegistry.addPart(`${APP_NAME}:heading`, {
     view: Heading
