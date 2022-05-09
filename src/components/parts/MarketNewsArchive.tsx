@@ -11,7 +11,7 @@ import NextLink from "next/link";
 
 const MarketNewsArchive = (props: PartProps) => {
 
-    const {meta, data} = props;
+    const {meta, data, part} = props;
 
     const news: {}[] = data.queryConnection.edges;
     const total: number = data.queryConnection.totalCount;
@@ -34,7 +34,7 @@ const MarketNewsArchive = (props: PartProps) => {
                 )}
             </UnorderedList>
             <Pager total={total}
-                   pageSize={25}
+                   pageSize={part.config.first || 25}
                    pageIndex={pageIndex}
                    url={getUrl(meta.path)}/>
             <PropsView {...props}/>
@@ -55,22 +55,22 @@ export const getMarketNewsArchive = {
         } else {
             pageIndex = "1"
         }
-        const offset = ((Number.parseInt(pageIndex) - 1) * pageSize).toString();
-        let buff = new Buffer(offset);
+        let offset = ((Number.parseInt(pageIndex) - 1) * pageSize);
+        if (pageIndex !== "1") offset -= 1;
+        let buff = new Buffer(offset.toString());
         let base64data
 
         pageIndex === "1" ?
             base64data = undefined :
             base64data = buff.toString('base64');
 
-        console.log("Cursor for offset (%s) for archive => %s", offset, base64data);
 
         return {
             path: path,
-            "query": " _path LIKE '*/markt-news/2022/*' AND type LIKE '*marketNews'",
+            "query": `_path LIKE '*${path}*' AND type LIKE '*marketNews'`,
             "sort": "data.pubDate DESC",
             "offset": base64data,
-            "first": 25
+            "first": pageSize
         }
     }
 }
