@@ -1,5 +1,5 @@
 import React from 'react';
-import {Heading, Link, ListItem, UnorderedList} from "@chakra-ui/react";
+import {Box, Heading, Link, ListItem, UnorderedList} from "@chakra-ui/react";
 import {PartProps} from "../../_enonicAdapter/views/BasePart";
 import getMarketNewsByPath from "../queries/getMarketNewsByPath";
 import {Context} from "../../pages/[[...contentPath]]";
@@ -20,6 +20,7 @@ const MarketNewsArchive = (props: PartProps) => {
     return (
         <>
             <Heading> News Archiv </Heading>
+            <Box>{total} News</Box>
             <UnorderedList>
                 {news && news.map((item: any, key: number) => {
                         return (
@@ -47,7 +48,7 @@ export const getMarketNewsArchive = {
     variables: function (path: string, context?: Context, config?: any): VariablesGetterResult {
         //todo: make helper function for that
         let pageIndex = context?.query?.page;
-        let pageSize = config?.first || 5;
+        let pageSize = config?.first || 25;
 
         if (pageIndex) {
             pageIndex = pageIndex[0];
@@ -69,7 +70,7 @@ export const getMarketNewsArchive = {
             "query": " _path LIKE '*/markt-news/2022/*' AND type LIKE '*marketNews'",
             "sort": "data.pubDate DESC",
             "offset": base64data,
-            "first": 5
+            "first": 25
         }
     }
 }
@@ -79,7 +80,7 @@ export async function newsArchiveProcessor(common: any, context?: Context): Prom
     return common;
 }
 
-const parseUrl = (path: string):string => {
+const parseUrl = (path: string): string => {
     const strippedPath = path.split("/").slice(2).join("/");
     return getUrl(strippedPath);
 }
