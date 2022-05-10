@@ -12,7 +12,7 @@ export interface PagerProps {
 
 const Pager = (props: PagerProps) => {
     const {total, pageSize, pageIndex, url} = props;
-    const pagesTotal = Math.round(total / pageSize);
+    const pagesTotal = Math.ceil(total / pageSize);
     const hasNext = pageIndex < pagesTotal;
     const prevUrl = pageIndex != 1 ? `${url}?page=${pageIndex - 1}` : `${url}`;
     const hasPrev = pageIndex > 1;

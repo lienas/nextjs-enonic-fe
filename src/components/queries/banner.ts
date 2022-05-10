@@ -16,8 +16,6 @@ query ($path: ID!) {
 `
 const variables = function (path: string, context?: Context, config?: any): VariablesGetterResult {
 
-    //console.log("pageIndex in variables callback %s", pageIndex);
-
     return {
       path: config.elements.image ? config.elements.image : ""
     }
