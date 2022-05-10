@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Heading, Link, ListItem, UnorderedList} from "@chakra-ui/react";
+import {Badge, Box, Heading, Link, ListItem, Text, UnorderedList} from "@chakra-ui/react";
 import {PartProps} from "../../_enonicAdapter/views/BasePart";
 import getMarketNewsByPath from "../queries/getMarketNewsByPath";
 import {Context} from "../../pages/[[...contentPath]]";
@@ -23,12 +23,22 @@ const MarketNewsArchive = (props: PartProps) => {
             <Box>{total} News</Box>
             <UnorderedList>
                 {news && news.map((item: any, key: number) => {
+                        const date = item.node.data.pubDate;
+                        const options = {
+                            weekday: 'long', year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit'
+                        }
+                        // @ts-ignore
+                        const localeDate = new Date(date).toLocaleDateString('de-DE', options);
+
                         return (
-                            <ListItem key={key}>
-                                <NextLink href={parseUrl(item.node._path)} passHref>
-                                    <Link>({item.node.data.pubDate}) {item.node.data.source} - {item.node.displayName}</Link>
-                                </NextLink>
-                            </ListItem>
+                            <>
+                                <ListItem key={key}>
+                                    <Text as={"i"} fontSize={'sm'}>{localeDate} </Text><Badge>{item.node.data.source}</Badge> -
+                                    <NextLink href={parseUrl(item.node._path)} passHref>
+                                        <Link> {item.node.displayName}</Link>
+                                    </NextLink>
+                                </ListItem>
+                            </>
                         )
                     }
                 )}
