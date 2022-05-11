@@ -1,60 +1,73 @@
-import React, {useEffect, useState} from 'react';
-import {mainNavigationQuery} from '../queries/navigation';
-import {Alert, AlertIcon, AlertTitle, Heading} from "@chakra-ui/react";
-import PropsView from "../views/Props";
+import React from 'react';
+import {
+    Button,
+    ButtonGroup,
+    Flex,
+    Heading,
+    Link,
+    Menu,
+    MenuButton,
+    Popover, PopoverContent,
+    PopoverTrigger,
+    Text,
+    VStack
+} from "@chakra-ui/react";
+import NextLink from "next/link";
+import {getUrl} from "../../_enonicAdapter/utils";
 
-const MainNavigation = () => {
+const MainNavigation = (props: any) => {
 
-    const [data, setData] = useState([]);
+    const {getMenuItems: menuItems} = props;
 
-    const variables = {
-        path: ""
+    //strip first segment
+    const parsePath = (path: string): string => {
+        const pathArr = path.split("/");
+        const newArr = [...pathArr.slice(2)];
+        return newArr.join("/");
     }
 
-    useEffect(() => {
-        const apiUrl = "http://localhost:8080/site/next/draft/hmdb/_graphql";
-        console.log("api-url (Main Nav) = %s", apiUrl);
-        const fetchData = async () => {
-            let response;
-            if (!apiUrl) {
-                console.error("no API URL");
-                return;
-            }
-            console.log("Fetch Menu...");
-            try {
-                response = await fetch(apiUrl, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        query: mainNavigationQuery,
-                        variables: variables
-                    })
-                })
-            } catch (e: any) {
-                console.log(e.message);
-                throw new Error(JSON.stringify({
-                    message: `Data fetching failed (message: '${e.message}')`
-                }));
-            }
+    const SubMenu = (props: any) => {
+        const {childs} = props;
+        console.log("Submenu %s", childs);
+        const submenu = childs?.map((child: any) => {
+            return (
+                <NextLink href={getUrl(child.path)} key={child.id} passHref>
+                    <Button as={"a"}>{child.title}</Button>
+                </NextLink>
+            )
+        })
 
-            if (!response.ok) {
-                throw new Error(JSON.stringify({
-                    status: response.status,
-                    message: `Data fetching failed (message: '${await response.text}')`
-                }));
+        return submenu || null
+    }
 
-            }
-            const json = await response.json();
-            setData(json);
-        }
-
-        fetchData().catch(console.error);
-
-    },[]);
+    if (!menuItems) return <></>;
 
     return (
+        menuItems &&
         <div>
             <Heading>Menu</Heading>
-            <PropsView {...data}/>
+            <ButtonGroup variant={"link"}>
+                {menuItems.map((item: any, key: number) => {
+                    return (
+                        <VStack key={item.id}>
+                            <Popover trigger={"hover"} placement={'bottom-start'}>
+
+                                <NextLink href={getUrl(parsePath(item.path))} passHref key={key}>
+                                    <PopoverTrigger>
+                                        <Button as={"a"} disabled={item.isActive}>
+                                            {item.title}
+                                        </Button>
+                                    </PopoverTrigger>
+                                </NextLink>
+
+                                <PopoverContent>
+                                    {item.children && <SubMenu childs={item.children}/>}
+                                </PopoverContent>
+                            </Popover>
+                        </VStack>
+                    )
+                })}
+            </ButtonGroup>
         </div>
     );
 };

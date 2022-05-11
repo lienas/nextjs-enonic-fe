@@ -3,9 +3,11 @@ import React from 'react';
 import {getUrl, RENDER_MODE, XP_REQUEST_TYPE} from "../_enonicAdapter/utils";
 import Header from "../components/views/Header";
 import Footer from "../components/views/Footer";
-import {ChakraProvider} from "@chakra-ui/react";
+import {ChakraProvider, extendTheme, type ThemeConfig} from "@chakra-ui/react";
 import {Container} from "@chakra-ui/layout";
 import PropsView from "../components/views/Props";
+import '../styles/globals.css';
+import {theme} from "../styles/theme";
 
 /**
  * Wraps all rendered components
@@ -13,6 +15,7 @@ import PropsView from "../components/views/Props";
  * @param pageProps {{common, data, meta, error}}
  */
 function MyApp({Component, pageProps}: AppProps) {
+
 
     // Component rendering - for component updates in Content Studio without reloading page
     if (pageProps.meta) {
@@ -25,12 +28,13 @@ function MyApp({Component, pageProps}: AppProps) {
             return null;
         }
     }
-    /*return <Component {...pageProps} />;*/
     return (
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
             <Header
                 title="🔥 Next.XP"
-                logoUrl={getUrl('images/xp-shield.svg')}/>
+                logoUrl={getUrl('images/osde_logo_einzeln.svg')}
+                {...pageProps}
+            />
             <Container maxW={"container.lg"}>
                 <Component {...pageProps} />
                 <PropsView {...pageProps}/>

@@ -12,7 +12,9 @@ export interface HeadingData {
 }
 
 const HeadingView = ({part, common}: HeadingData) => (
-    <Heading color={"orange.500"} py={5}>{part?.config?.heading || common.displayName}</Heading>
+    <>
+        <Heading color={"brand.100"} py={5}>{part?.config?.heading || common?.get.displayName}</Heading>
+    </>
 );
 
 export default HeadingView;
