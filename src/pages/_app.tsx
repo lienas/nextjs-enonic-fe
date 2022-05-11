@@ -3,7 +3,7 @@ import React from 'react';
 import {getUrl, RENDER_MODE, XP_REQUEST_TYPE} from "../_enonicAdapter/utils";
 import Header from "../components/views/Header";
 import Footer from "../components/views/Footer";
-import {ChakraProvider, extendTheme, type ThemeConfig} from "@chakra-ui/react";
+import {ChakraProvider} from "@chakra-ui/react";
 import {Container} from "@chakra-ui/layout";
 import PropsView from "../components/views/Props";
 import '../styles/globals.css';
