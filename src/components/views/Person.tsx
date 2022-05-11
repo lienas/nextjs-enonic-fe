@@ -1,6 +1,8 @@
 import React from "react"
 import {FetchContentResult} from '../../_enonicAdapter/guillotine/fetchContent';
 import {getUrl} from '../../_enonicAdapter/utils'
+import NextLink from 'next/link';
+import {Link} from "@chakra-ui/react";
 
 const Person = (props: FetchContentResult) => {
     const {displayName, data, parent} = props.data?.get as any;
@@ -25,7 +27,11 @@ const Person = (props: FetchContentResult) => {
                     ))
                 }
             </div>
-            <p><a href={getUrl(_path)}>Back to Persons</a></p>
+            <p>
+                <NextLink href={getUrl(_path)} passHref>
+                    <Link>Back to Persons</Link>
+                </NextLink>
+            </p>
         </>
     )
 }
