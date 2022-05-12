@@ -10,13 +10,13 @@ import {
     useColorModeValue
 } from "@chakra-ui/react";
 import {FiMenu} from 'react-icons/fi';
-import {PageProps} from "../../_enonicAdapter/views/BasePage";
+import {PageProps} from "../../../_enonicAdapter/views/BasePage";
 import {Container} from "@chakra-ui/layout";
-import {Logo2} from "../ui/Logo2";
-import {getUrl} from "../../_enonicAdapter/utils";
+import {Logo2} from "../Logo2";
+import {getUrl} from "../../../_enonicAdapter/utils";
 import NextLink from "next/link";
-import {Logo} from "../ui/Logo";
-import {DarkModeToggler} from "../ui/DarkModeToggler";
+import {Logo} from "../Logo";
+import {DarkModeToggler} from "../DarkModeToggler";
 
 
 export interface HeaderProps extends PageProps {
@@ -26,7 +26,6 @@ export interface HeaderProps extends PageProps {
 
 const Header = (props: HeaderProps) => {
     const {title, logoUrl} = props;
-    console.log("pageProps %s", props);
     const isDesktop = useBreakpointValue({base: false, lg: true})
     return (
         <Box as="section" pb={{base: '8', md: '12'}}>

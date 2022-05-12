@@ -2,7 +2,6 @@ import {chakra, HTMLChakraProps, Image} from '@chakra-ui/react'
 import * as React from 'react'
 
 export const Logo2 = (props: HTMLChakraProps<'svg'>) => {
-    console.log("SVGProps: %s", props);
     return (
         <chakra.svg
             color="brand.100"

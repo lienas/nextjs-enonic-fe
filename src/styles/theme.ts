@@ -1,5 +1,4 @@
-import {extendTheme, ThemeConfig, useColorMode} from "@chakra-ui/react";
-import {mode} from "@chakra-ui/theme-tools";
+import {extendTheme, ThemeConfig, theme as baseTheme} from "@chakra-ui/react";
 
 const config: ThemeConfig = {
     initialColorMode: 'light',
@@ -14,6 +13,11 @@ export const theme = extendTheme({
             // ...
             900: "#1a202c",
         },
+        accent: {
+            100: baseTheme.colors.cyan["200"],
+            500: "var(--chakra-colors-orange-500)",
+            900: "var(--chakra-colors-red-500)",
+        }
     },
     components: {
         Button: {

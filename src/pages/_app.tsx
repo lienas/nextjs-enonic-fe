@@ -1,11 +1,11 @@
 import type {AppProps} from 'next/app'
 import React from 'react';
 import {getUrl, RENDER_MODE, XP_REQUEST_TYPE} from "../_enonicAdapter/utils";
-import Header from "../components/views/Header";
-import Footer from "../components/views/Footer";
+import Header from "../components/ui/layout/Header";
+import Footer from "../components/ui/layout/Footer";
 import {ChakraProvider} from "@chakra-ui/react";
 import {Container} from "@chakra-ui/layout";
-import PropsView from "../components/views/Props";
+import PropsView from "../components/ui/debug/Props";
 import '../styles/globals.css';
 import {theme} from "../styles/theme";
 

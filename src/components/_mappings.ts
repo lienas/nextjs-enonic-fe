@@ -1,7 +1,7 @@
 import {APP_NAME} from '../_enonicAdapter/utils'
 import {ComponentRegistry, CATCH_ALL} from '../_enonicAdapter/ComponentRegistry';
 import {commonQuery, commonVariables} from './queries/common';
-import PropsView from './views/Props';
+import PropsView from './ui/debug/Props';
 import getPerson from "./queries/getPerson";
 import Person from "./views/Person";
 import MainPage from "./pages/Main";
@@ -12,11 +12,11 @@ import MovieDetails, {getMovie} from "./parts/MovieDetails";
 import MarketNews from "./views/MarketNews";
 import getMarketNews from "./queries/getMarketNews";
 import Banner from "./parts/Banner";
-import {getBannerUrl} from "./queries/banner";
+import {getBanner} from "./queries/getBanner";
 import Container from "./layouts/Container";
 import {mainNavigationQuery} from "./queries/navigation";
-import getMarketNewsByPath from "./queries/getMarketNewsByPath";
-import MarketNewsArchive, {getMarketNewsArchive, newsArchiveProcessor} from "./parts/MarketNewsArchive";
+import {getMarketNewsArchive, newsArchiveProcessor} from "./queries/getMarketNewsByPath";
+import MarketNewsArchive from "./parts/MarketNewsArchive";
 
 
 // You can set common query for all views here
@@ -74,7 +74,7 @@ ComponentRegistry.addPart(`${APP_NAME}:movie-details`, {
 
 ComponentRegistry.addPart(`${APP_NAME}:banner`, {
     view: Banner,
-    query: getBannerUrl
+    query: getBanner
 });
 
 

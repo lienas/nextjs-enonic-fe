@@ -34,7 +34,7 @@ export class RichTextProcessor {
 
     private static processImages(root: HTMLElement): void {
         const imgs = root.querySelectorAll('img[' + this.imageAttr + ']');
-        console.log("processImages %s", imgs);
+        //console.log("processImages %s", imgs);
         imgs.forEach(img => {
             const src = img.getAttribute('src');
             if (src) {

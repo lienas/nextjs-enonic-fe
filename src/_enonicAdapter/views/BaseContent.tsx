@@ -40,7 +40,7 @@ const BaseContent = (props: FetchContentResult) => {
         return <ContentTypeView {...props}/>
     }
 
-    console.log(`BaseContent: can not render ${meta.type}: no content type or page view defined`);
+    //console.log(`BaseContent: can not render ${meta.type}: no content type or page view defined`);
     return null;
 }
 

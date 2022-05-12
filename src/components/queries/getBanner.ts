@@ -9,6 +9,10 @@ query ($path: ID!) {
       type
       ... on media_Image {
         imageUrl(type: absolute, scale: "block(1024, 250)")
+        displayName
+        data {
+          caption
+        }
       }
     }
   }
@@ -21,7 +25,7 @@ const variables = function (path: string, context?: Context, config?: any): Vari
     }
 }
 
-export const getBannerUrl = {
+export const getBanner = {
     query: bannerQuery,
     variables: variables
 }

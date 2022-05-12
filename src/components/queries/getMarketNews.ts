@@ -8,7 +8,7 @@ query ($path: ID!) {
       ... on com_enonic_app_nextjsdemo_MarketNews {
         data {
           title
-          content(processHtml:{type:absolute}) {
+          content(processHtml: {type: absolute}) {
             processedHtml
             links {
               ref
@@ -26,7 +26,9 @@ query ($path: ID!) {
           image
           imageAttachment {
             ... on media_Image {
-              imageUrl(scale: "width(300)", type: absolute)
+              xAsJson
+              imageUrl_m: imageUrl(scale: "width(300)", type: absolute)
+              imageUrl_s: imageUrl(scale: "width(150)", type: absolute)
             }
           }
         }

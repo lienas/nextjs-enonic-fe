@@ -28,7 +28,6 @@ const MainNavigation = (props: any) => {
 
     const SubMenu = (props: any) => {
         const {childs} = props;
-        console.log("Submenu %s", childs);
         const submenu = childs?.map((child: any) => {
             return (
                 <NextLink href={getUrl(child.path)} key={child.id} passHref>

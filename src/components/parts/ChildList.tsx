@@ -3,7 +3,7 @@ import {PartProps} from '../../_enonicAdapter/views/BasePart';
 import {Context} from '../../pages/[[...contentPath]]';
 import {VariablesGetterResult} from '../../_enonicAdapter/ComponentRegistry';
 import {getUrl} from '../../_enonicAdapter/utils'
-import PropsView from "../views/Props";
+import PropsView from "../ui/debug/Props";
 import NextLink from "next/link";
 import {Heading, Link, ListItem, UnorderedList} from "@chakra-ui/react";
 import Pager from "../ui/Pager";
@@ -13,13 +13,8 @@ const ChildList = (props: PartProps) => {
     const {data, meta, common, part} = props;
     const children = data.get.children;
     const totalCount = data.getChildrenConnection.totalCount;
-    //const pageIndex = data.pageIndex;
     const [childs, setChilds] = useState(children);
     const [pageIndex, setPageIndex] = useState(data.pageIndex);
-
-    console.log("Common passed to childList = %s", common);
-    console.log("Meta passed to childList = %s", meta);
-    console.log("pageIndex = %s", pageIndex);
 
     useEffect(() => {
         setChilds(data.get.children);
@@ -36,7 +31,7 @@ const ChildList = (props: PartProps) => {
             maxWidth: 960,
             padding: `0 1.0875rem`,
         }}>
-            <Heading as={"h1"} color={"limegreen"}>{totalCount} Element</Heading>
+            <Heading as={"h3"} fontSize={"2xl"} color={"brand.100"}>{totalCount} Element{totalCount > 1 ? 'e' : null}</Heading>
             {
                 childs &&
                 <UnorderedList>{
