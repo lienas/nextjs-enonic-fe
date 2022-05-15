@@ -53,6 +53,7 @@ const MarketNewsArchive = (props: PartProps) => {
     }
 
     const fetchNews = async () => {
+        // todo: get from envelope
         const API_URL = "http://localhost:8080/site/next/draft/hmdb/_graphql"
         let resp;
         let total; // total from client fetch

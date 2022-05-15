@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react';
+import React, {RefObject, useEffect} from 'react';
 import {useDisclosure} from "@chakra-ui/hooks";
 import {
     Button, ButtonGroup,
@@ -8,16 +8,54 @@ import {
     DrawerContent, DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
-    Input
+    Input, ListItem, UnorderedList
 } from "@chakra-ui/react";
 
 import {useRouter} from "next/router";
 import {TiFilter, TiTimes} from "react-icons/ti";
+import {getSourceAgg} from "../queries/getSourceAgg";
 
 export interface MarketFilterProps {
     filterNews: React.Dispatch<React.SetStateAction<string>>,
     setIsActive: React.Dispatch<React.SetStateAction<boolean>>,
     isActive: boolean
+}
+
+export interface AggregationBucket {
+    key: string,
+    docCount: number
+}
+
+const fetchSourceAggregation = async (props: any) => {
+    // todo: get from envelope
+    const API_URL = "http://localhost:8080/site/next/draft/hmdb/_graphql";
+    const query = "type like '*market*'";
+    const {setSource} = props;
+
+    let resp;
+    let total; // total from client fetch
+
+    try {
+        resp = await fetch(API_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                query: getSourceAgg,
+                variables: {
+                    query: query
+                }
+            })
+        });
+
+        const sourceAgg: any = await resp.json();
+        const queryConn = sourceAgg.data.guillotine.queryConnection;
+        const buckets = queryConn.aggregationsAsJson.bySource.buckets;
+        setSource(buckets);
+        console.log(JSON.stringify(sourceAgg.data.guillotine.queryConnection, null, 2));
+
+
+    } catch (e: any) {
+        console.log(e.message);
+    }
 }
 
 const MarketNewsArchiveFilter = (props: MarketFilterProps) => {
@@ -27,13 +65,12 @@ const MarketNewsArchiveFilter = (props: MarketFilterProps) => {
     const query = router.query;
     const {term} = query;
     const [value, setValue] = React.useState(term);
+    const [source, setSource] = React.useState<AggregationBucket[]>([]);
 
     const {filterNews, setIsActive, isActive} = props;
-    //console.log("News-Filter -> %s", JSON.stringify(props, null, 2));
 
     const handleChange = (event: React.FormEvent<EventTarget>) => {
         const target = event.target as HTMLInputElement;
-        //console.log("term changed....", target.value);
         const term = target.value;
         setValue(term);
         setIsActive(true);
@@ -45,9 +82,14 @@ const MarketNewsArchiveFilter = (props: MarketFilterProps) => {
         filterNews('');
         setIsActive(false);
 
-        //todo:check if that works
         await router.push(router.query.contentPath + '');
     }
+
+    useEffect(() => {
+        //Source Aggregation
+        fetchSourceAggregation({setSource: setSource});
+
+    }, [value]);
 
     return (
         <>
@@ -81,6 +123,9 @@ const MarketNewsArchiveFilter = (props: MarketFilterProps) => {
 
                     <DrawerBody>
                         <Input placeholder='Type here...' onChange={handleChange} value={value}/>
+                        <UnorderedList my={5}>
+                        {source.map(s => (<ListItem key={s.key}>{s.key} ({s.docCount})</ListItem>))}
+                        </UnorderedList>
                     </DrawerBody>
 
                     <DrawerFooter>
