@@ -1,4 +1,5 @@
 import {getUrl} from "../_enonicAdapter/utils";
+import {isArray} from "@chakra-ui/utils";
 
 export const parseUrl = (path: string): string => {
     const strippedPath = path.split("/").slice(2).join("/");
@@ -14,7 +15,7 @@ interface CursorInput {
 export const calculateCursor = (props: CursorInput) => {
 
     let {pageIndex, pageSize} = props;
-    console.log("[helper] pageIndex = %s, pageSize= %s  ",pageIndex, pageSize);
+    //console.log("[helper] pageIndex = %s, pageSize= %s  ", pageIndex, pageSize);
 
     // let pageIndex = context?.query?.page;
     // let pageSize = config?.first || 25;
@@ -32,11 +33,24 @@ export const calculateCursor = (props: CursorInput) => {
     let buff = new Buffer(offset.toString());
     let base64data
 
-    console.log("[helper] pageIndex = %s, pageSize= %s , offset = %s ",pageIndex, pageSize, offset);
+    //console.log("[helper] pageIndex = %s, pageSize= %s , offset = %s ", pageIndex, pageSize, offset);
 
     pageIndex === 1 ?
         base64data = undefined :
         base64data = buff.toString('base64');
 
     return base64data;
+}
+
+export const parseString = (prop: string | string[] | undefined): string | undefined => {
+
+    let parsedString;
+    if (isArray(prop)) {
+        parsedString = prop[0]
+    } else
+    {
+        parsedString = prop
+    }
+
+    return parsedString
 }

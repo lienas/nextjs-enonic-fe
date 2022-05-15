@@ -39,18 +39,22 @@ export async function newsArchiveProcessor(common: any, context?: Context): Prom
 }
 
 const varCallback = (path: string, context?: Context, config?: any): VariablesGetterResult => {
-    let pageIndex = context?.query?.page || 1;
-    let pageSize = config?.first || 25;
+    const pageIndex = context?.query?.page || 1;
+    const pageSize = config?.first || 25;
+    const term = context?.query?.term;
 
     const base64data = calculateCursor({
         pageIndex: pageIndex,
         pageSize: parseInt(pageSize)
     });
 
+    let query = `_path LIKE '*${path}*' AND type LIKE '*marketNews'`;
+    if (term) query += ` AND fulltext('*','${term}','AND')`;
+    console.log("query = %s", query);
 
     return {
         path: path,
-        "query": `_path LIKE '*${path}*' AND type LIKE '*marketNews'`,
+        "query": query,
         "sort": "data.pubDate DESC",
         "offset": base64data,
         "first": pageSize
