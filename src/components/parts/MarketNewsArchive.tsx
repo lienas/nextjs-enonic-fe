@@ -20,7 +20,7 @@ const MarketNewsArchive = (props: PartProps) => {
 
     const [newsData, setNewsData] = useState(data.queryConnection);
     const [filter, setFilter] = useState(term as string || '');
-    const [isFilterActive, setIsFilterActive] = useState(false);
+    const [isFilterActive, setIsFilterActive] = useState(term !== undefined);
     const pageSize = part.config?.first || 25;
 
     let news = newsData?.edges;
