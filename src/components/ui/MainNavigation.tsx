@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-    Button,
-    ButtonGroup,
-    Flex,
-    Heading,
-    Link,
-    Menu,
-    MenuButton,
-    Popover, PopoverContent,
-    PopoverTrigger,
-    Text,
-    VStack
-} from "@chakra-ui/react";
+import {Button, ButtonGroup, Heading, Popover, PopoverContent, PopoverTrigger, VStack} from "@chakra-ui/react";
 import NextLink from "next/link";
 import {getUrl} from "../../_enonicAdapter/utils";
 

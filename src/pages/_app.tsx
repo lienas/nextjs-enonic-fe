@@ -35,7 +35,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 logoUrl={getUrl('images/osde_logo_einzeln.svg')}
                 {...pageProps}
             />
-            <Container maxW={"container.lg"}>
+            <Container as={"section"} maxW={"container.lg"}>
                 <Component {...pageProps} />
                 <PropsView {...pageProps}/>
             </Container>
