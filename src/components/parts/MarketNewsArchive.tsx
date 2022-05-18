@@ -93,7 +93,7 @@ const MarketNewsArchive = (props: PartProps) => {
     }
 
     useEffect(() => {
-        console.log("useEffect in MarketNewsArchive with term = %s", term);
+        // console.log("useEffect in MarketNewsArchive with term = %s", term);
         //setIsFilterActive(!!(term && term?.length > 0));
 
         if (isFilterActive) {

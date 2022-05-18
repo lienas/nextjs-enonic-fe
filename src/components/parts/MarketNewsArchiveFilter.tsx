@@ -14,6 +14,7 @@ import {
 import {useRouter} from "next/router";
 import {TiFilter, TiTimes} from "react-icons/ti";
 import {getSourceAgg} from "../queries/getSourceAgg";
+import {parseString} from "../../utils/helpers";
 
 export interface MarketFilterProps {
     filterNews: React.Dispatch<React.SetStateAction<string>>,
@@ -26,11 +27,20 @@ export interface AggregationBucket {
     docCount: number
 }
 
-const fetchSourceAggregation = async (props: any) => {
+export interface SourceAggregationProps {
+    term: string | undefined,
+    setSource: React.Dispatch<React.SetStateAction<AggregationBucket[]>>
+}
+
+const fetchSourceAggregation = async (props: SourceAggregationProps) => {
     // todo: get from envelope
     const API_URL = "http://localhost:8080/site/next/draft/hmdb/_graphql";
-    const query = "type like '*market*'";
-    const {setSource} = props;
+    // todo: adjust query
+    const {term, setSource} = props;
+
+    // todo: this query is also used in getMarketNewsByPath - should be refactored
+    let query = "type like '*market*'";
+    if (term != undefined) query += ` AND fulltext('*','${term}','AND')`;
 
     let resp;
     let total; // total from client fetch
@@ -50,7 +60,7 @@ const fetchSourceAggregation = async (props: any) => {
         const queryConn = sourceAgg.data.guillotine.queryConnection;
         const buckets = queryConn.aggregationsAsJson.bySource.buckets;
         setSource(buckets);
-        console.log(JSON.stringify(sourceAgg.data.guillotine.queryConnection, null, 2));
+        // console.log(JSON.stringify(sourceAgg.data.guillotine.queryConnection, null, 2));
 
 
     } catch (e: any) {
@@ -87,7 +97,7 @@ const MarketNewsArchiveFilter = (props: MarketFilterProps) => {
 
     useEffect(() => {
         //Source Aggregation
-        fetchSourceAggregation({setSource: setSource});
+        fetchSourceAggregation({setSource: setSource, term: parseString(value)});
 
     }, [value]);
 
