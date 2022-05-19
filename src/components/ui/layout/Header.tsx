@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import {
     Box,
     Button,
@@ -23,14 +23,22 @@ export interface HeaderProps extends PageProps {
     logoUrl: string;
 }
 
+
 const Header = (props: HeaderProps) => {
     const {title, logoUrl} = props;
-    //const isDesktop = useBreakpointValue({base: false, lg: true})
-    const isDesktop = true;
+    const [isDesktop, setIsDesktop] = useState(true);
+    const breakpointValue = useBreakpointValue({base: false, lg: true});
+
+    useEffect(() => {
+        console.log('useEffect in header');
+        setIsDesktop(breakpointValue || false);
+    }, [breakpointValue])
+
+    //const isDesktop = true;
     return (
         <Box as="section" pb={{base: '8', md: '12'}}>
             <Box as="nav" bg="bg-surface" boxShadow={useColorModeValue('sm', 'sm-dark')}>
-                <Container py={{base: '4', lg: '5'}} maxW={"container.lg"} >
+                <Container py={{base: '4', lg: '5'}} maxW={"container.lg"}>
                     <HStack spacing="10" justify="space-between">
                         <Logo2 color={"brand.100"}/>
                         {isDesktop ? (
